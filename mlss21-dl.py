@@ -95,7 +95,7 @@ lectures= {'0802': [
                         {
                             'index': 4,
                             'speaker': 'Hsuan-Tien Lin',
-                            'title': 'Large scale learning and planning in reinforcement learning',
+                            'title': 'Cost-sensitive Classification Techniques and Stories',
                             'link': 'https://webinar.tapmeetinglive.com/events/Hsuan_Tien_Lin',
                             'handout': 'http://ai.ntu.edu.tw/mlss2021/wp-content/uploads/2021/08/0802-Hsuan-Tien-Lin.pdf'
 

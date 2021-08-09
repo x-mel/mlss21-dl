@@ -19,7 +19,7 @@ import re
 
 def start_chrome():
 
-    user_agent= 'user-agent= "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0" '
+    user_agent='user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'
     options = webdriver.ChromeOptions()
 
     options.binary_location = '/usr/bin/google-chrome-stable'
@@ -104,7 +104,7 @@ lectures= {'0802': [
                         },
                         {
                             'speaker': 'Shou-De Lin',
-                            'title': 'Machine Learning as a Services: Challenges and Opportunities',
+                            'title': 'Machine Learning as a Services Challenges and Opportunities',
                             'link': 'https://webinar.tapmeetinglive.com/events/Industry0803',
                         },     
                         {
@@ -131,7 +131,7 @@ lectures= {'0802': [
                         {
                                                 
                             'speaker': 'Johnny Tseng',
-                            'title': 'Transform the Beauty Industry through AI + AR: Perfect Corp Innovative Vision into the Digital Era',
+                            'title': 'Transform the Beauty Industry through AI AR Perfect Corp Innovative Vision into the Digital Era',
                             'link': 'https://webinar.tapmeetinglive.com/events/Industry0804',
                         },   
                         {
@@ -177,13 +177,19 @@ lectures= {'0802': [
     }
 
 
-
 for day in lectures.keys():
     for session in lectures[day]:
         video_url = get_download_link(session['link'])
         file_name = '{}-{}_{}.mp4'.format(day, session['speaker'], session['title'])
         print('********'*9, flush=True)
-        print("Downloading:", file_name, flush=True)
+        
+        if 'handout' in session:
+            print("Downloading Handout")
+            os.system('curl -C - -L -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.25 Safari/537.36" -H "Cookie: allow-download=1" -O "%s" '  %(session['handout']))
+
+        print("Downloading Video:", file_name, flush=True)
+        
         print('********'*9, flush=True)
         os.system('curl "%s" -C - -L -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.25 Safari/537.36" -H "Cookie: allow-download=1" -o "%s"' %(video_url, file_name))
         print('---------'*9, flush=True)
+
